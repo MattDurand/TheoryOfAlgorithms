@@ -51,6 +51,34 @@ void md5_hash_string(uint8_t *initial_message) {
             0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
             0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391};
 
+    // calculates the length of the message
+    size_t initial_length = strlen((char *) initial_message);
+
+    uint8_t *message = NULL;
+
+    // Initializing earlier vars with hash values
+    a = 0x67452301;
+    b = 0xefcdab89;
+    c = 0x98badcfe;
+    d = 0x10325476;
+
+    // Append single "1" bit to input message
+    int new_length = ((((initial_length + 8) / 64) + 1) * 64) - 8;
+
+    // calloc is used to allocate memory
+    // Append "0" bits until the resulting length is 448, modulo 512
+    message = calloc(new_length + 64, 1);
+
+    // memcpy is a built in method that creates a copy of a memory block
+    memcpy(message, initial_message, initial_length);
+
+    // append the 1 bit to the message
+    message[initial_length] = 128;
+
+    // Append the length of the message to 512 bits by adding a representation of the original message in 64-bits
+    uint32_t bit_length = 8 * initial_length;
+    memcpy(message + new_length, &bit_length, 4);
+
 int main() {
     printf("Hello, World!\n");
     return 0;
