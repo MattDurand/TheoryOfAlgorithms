@@ -79,6 +79,56 @@ void md5_hash_string(uint8_t *initial_message) {
     uint32_t bit_length = 8 * initial_length;
     memcpy(message + new_length, &bit_length, 4);
 
+    // Process Message in 16-word blocks
+    // for each 512 bits
+    for (int i = 0; i < new_length; i += 64) {
+        // each 512 bits break it into 16, 32-bit words
+        uint32_t *m = (uint32_t *) (message + i);
+
+        // Variables for buffer
+        uint32_t aa = a;
+        uint32_t bb = b;
+        uint32_t cc = c;
+        uint32_t dd = d;
+
+        int32_t j;
+        for (j = 0; j < 64; j++) {
+
+            uint32_t f, g;
+
+            // Adapted from: https://www.ietf.org/rfc/rfc1321.txt
+            if (j < 16) {
+                f = (bb & cc) | ((~bb) & dd);
+                g = j;
+            } else if (j < 32) {
+                f = (dd & bb) | ((~dd) & cc);
+                g = (5 * j + 1) % 16;
+            } else if (j < 48) {
+                f = bb ^ cc ^ dd;
+                g = (3 * j + 5) % 16;
+            } else {
+                f = cc ^ (bb | (~dd));
+                g = (7 * j) % 16;
+            }
+
+            // temp to hold dd while rotation occurs
+            uint32_t temp = dd;
+            dd = cc;
+            cc = bb;
+            bb = bb + LEFT_ROTATE((aa + f + k[j] + m[g]), s[j]);
+            aa = temp;
+        }
+
+        // Adding the output hash from the loop to the result
+        a += aa;
+        b += bb;
+        c += cc;
+        d += dd;
+
+    }
+
+}//MD5_HASH_STRING
+
 int main() {
     printf("Hello, World!\n");
     return 0;
