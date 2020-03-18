@@ -129,7 +129,8 @@ void md5_hash_string(uint8_t *initial_message) {
 
 }//MD5_HASH_STRING
 
-int main() {
-    printf("Hello, World!\n");
-    return 0;
+int main(int argc, char **argv) {
+    char *msg = argv[1];
+
+    uint8_t *digest;
 }
