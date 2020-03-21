@@ -133,4 +133,17 @@ int main(int argc, char **argv) {
     char *msg = argv[1];
 
     uint8_t *digest;
+
+
+    printf("The Hash Output of this Input is: \n");
+    digest = (uint8_t *) &a;
+    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], a);
+    digest = (uint8_t *) &b;
+    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], b);
+    digest = (uint8_t *) &c;
+    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], c);
+    digest = (uint8_t *) &d;
+    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], d);
+    printf("\n");
+
 }
