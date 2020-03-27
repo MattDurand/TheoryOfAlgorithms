@@ -134,16 +134,94 @@ int main(int argc, char **argv) {
 
     uint8_t *digest;
 
+// Getopt command features
+    int c;
+    while ((c = getopt(argc, argv, "s:t:h:")) != -1) {
+        switch (c) {
+            case 's':
+                //Input string to hash
+                *msg = optarg;
+                md5_hash_string((uint8_t *) optarg);
 
-    printf("The Hash Output of this Input is: \n");
-    digest = (uint8_t *) &a;
-    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], a);
-    digest = (uint8_t *) &b;
-    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], b);
-    digest = (uint8_t *) &c;
-    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], c);
-    digest = (uint8_t *) &d;
-    printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], d);
-    printf("\n");
+                printf("The Hash Output of this Input is: \n");
+                digest = (uint8_t *) &a;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], a);
+                digest = (uint8_t *) &b;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], b);
+                digest = (uint8_t *) &c;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], c);
+                digest = (uint8_t *) &d;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], d);
+                printf("\n");
+                break;
+            case 't':
+                // Test cases as described in RFC document
+                printf("The following is a list of test cases to run to ascertain that the correct hashing is occurring\n");
+                printf("==============================================================================================\n");
+                printf("Input: ''  Should produce output: d41d8cd98f00b204e9800998ecf8427e \n");
+                md5_hash_string((uint8_t *) "");
+
+                printf("The Hash Output of this Input is: \n");
+                digest = (uint8_t *) &a;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], a);
+                digest = (uint8_t *) &b;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], b);
+                digest = (uint8_t *) &c;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], c);
+                digest = (uint8_t *) &d;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], d);
+                printf("\n");
+
+                printf("Input: 'a'  Should produce output: 0cc175b9c0f1b6a831c399e269772661 \n");
+                md5_hash_string((uint8_t *) "a");
+                printf("The Hash Output of this Input is: \n");
+                digest = (uint8_t *) &a;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], a);
+                digest = (uint8_t *) &b;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], b);
+                digest = (uint8_t *) &c;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], c);
+                digest = (uint8_t *) &d;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], d);
+                printf("\n");
+
+                printf("Input: 'abc' Should produce output: 900150983cd24fb0d6963f7d28e17f72 \n");
+                md5_hash_string((uint8_t *) "abc");
+                printf("The Hash Output of this Input is: \n");
+                digest = (uint8_t *) &a;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], a);
+                digest = (uint8_t *) &b;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], b);
+                digest = (uint8_t *) &c;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], c);
+                digest = (uint8_t *) &d;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], d);
+                printf("\n");
+
+                printf("Input: 'message digest'  Should produce output: f96b697d7cb7938d525a2f31aaf161d0 \n");
+                md5_hash_string((uint8_t *) "message digest");
+                printf("The Hash Output of this Input is: \n");
+                digest = (uint8_t *) &a;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], a);
+                digest = (uint8_t *) &b;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], b);
+                digest = (uint8_t *) &c;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], c);
+                digest = (uint8_t *) &d;
+                printf("%2.2x%2.2x%2.2x%2.2x", digest[0], digest[1], digest[2], digest[3], d);
+                printf("\n");
+
+                printf("\n");
+
+                break;
+            case 'h':
+                printf("-s 'string here'    hashes input string\n");
+                printf("-t     Runs all test cases\n");
+                printf("-h     This command, provides help\n");
+                break;
+        }
+    }
+
+    return 0;
 
 }
