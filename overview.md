@@ -34,8 +34,8 @@ This section is in place to provide instructions on how to clone, compile and ru
 ``` Git Clone https://github.com/MattDurand/TheoryOfAlgorithms ```
 * From here, change directory to the project by entering the following command  
 ``` cd cmake-build-debug/ ```
-* To compile the project code  
-``` gcc -lm -Wall -o md5 main.c ```
+* To compile the project code (Do this every time before running) enter:  
+  ``` gcc -lm -Wall -o md5 main.c ```
 * To run the code and to hash an input string, enter the following command:   
 ``` ./md5 -s "Your string here" ```   
 * To run the code and see a set of test cases being run, enter the following command:   

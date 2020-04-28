@@ -1,3 +1,6 @@
+Matthew Durand
+G00346987
+
 The following is an overview of my final year Theory of Algorithms project. The project is a program written in C that calculates the MD5 (Message-Digest Algorithm) hash digest of an input. 
 
 # Run:
@@ -21,7 +24,7 @@ This section is in place to provide instructions on how to clone, compile and ru
 ``` Git Clone https://github.com/MattDurand/TheoryOfAlgorithms ```
 * From here, change directory to the project by entering the following command  
 ``` cd cmake-build-debug/ ```
-* To compile the project code (Do this every time before running)
+* To compile the project code (Do this every time before running) enter:  
 ``` gcc -lm -Wall -o md5 main.c ```
 * To run the code and to hash an input string, enter the following command:   
 ``` ./md5 -s "Your string here" ```   
